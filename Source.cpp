@@ -8,7 +8,6 @@ const char filename[15] = "BOARD.DTA";              //edit filename to apply own
 
 void print();
 void solve();
-void backtrackEmtyCell(int i, int k);
 bool testRegion(int i, int k, int tempValue);
 bool testX(int i, int tempValue);
 bool testY(int k, int tempValue);
@@ -154,22 +153,6 @@ void solve() {
       }
     }
   }
-}
-
-void backtrackEmtyCell(int i, int k) {
-
-  do {
-    k--;                                            //changes columnnumber
-    if (k < 1) {                                    //changes rownumber
-      k = MAXV;
-      i--;
-    }
-    if (i < 1) {                                    //NO SOLUTION
-      std::cout << "\n\n\tERROR: no solution" << std::endl;
-      i = k = MAXV;
-      noSolution = true;
-    }                                               //backtracs until emty cell is found
-  } while (!emty[(MAXV * i) - (MAXV - k)]);
 }
 
 bool testRegion(int i, int k, int tempValue) {
