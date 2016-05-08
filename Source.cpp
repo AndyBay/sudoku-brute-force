@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <chrono>
 
 const int MAXV = 9;
 const int testing = 0;                              //enables testoutput (1 = changed value | 2 = current board progression)
@@ -23,7 +24,7 @@ int  sudoku[MAXV + 1][MAXV + 1];                    //array with all values (sta
 bool    emty[(MAXV * MAXV) + 1];                    //array with free cell / not free cell bool (starting at 1)
 
 long long numChangedPath = 0;                       //stats
-long   changedValue = 0;                            //stats
+long long   changedValue = 0;                       //stats
 bool noSolution = false;
 
 int main() {
@@ -41,30 +42,29 @@ int main() {
 
     std::cout << "\n\tORIGINAL BOARD:\n\n";
     print();
+	  std::chrono::steady_clock::time_point startCalk = std::chrono::steady_clock::now();
     solve();
+	  std::chrono::steady_clock::time_point endCalk = std::chrono::steady_clock::now();
+
+  
 
     if (!noSolution) {
-      std::cout << "\n\n\tSOLVED BOARD:\n\n";
-      print();
+		std::cout << "\n\n\tSOLVED BOARD:\n\n";
+       print();
 
-      time_t endTime = time(0);                     //endtime
-      ctime_s(currentTime, sizeof currentTime, &endTime);
+       time_t endTime = time(0);                     //endtime
+       ctime_s(currentTime, sizeof currentTime, &endTime);
 
-      std::cout << "\n\tFinnished calculating at: " << currentTime;
+       std::cout << "\n\tFinnished calculating at: " << currentTime;
+        
+       std::chrono::steady_clock::duration diff = endCalk - startCalk;
 
-      int usedTime = (endTime - startTime);         //amount of time used
-      if (usedTime >= 60) {                         //with minutes
-        int min = usedTime / 60;
-        int sec = usedTime - (min * 60);
-        std::cout << "\n\tUsed " << min
-                  << " min " << sec;
-      }
-      else {                                        //seconds (whole)
-        std::cout << "\n\tUsed " << endTime - startTime;
-      }
-      std::cout << " second(s) to calculate given board."
+       float milli = std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
+	  
+	     std::cout << "\n\tUsed " << milli/1000 << " second(s) to calculate given board."
                 << "\n\n\tChanged path  " << numChangedPath << " time(s)\n"
                 << "\tChanged value " << changedValue << " time(s)\n";
+		
     }
   }
   std::cout << "\n\tEnter to quit: ";
