@@ -221,7 +221,7 @@ void fillAlts() {										//fills "new" alternative numbers for each cell
 	for (int i = 0; i < MAXV; i++) {
 		for (int k = 0; k < MAXV; k++) {
 			for (int j = 0; j < MAXV; j++) {
-				if (sudoku[i][k].alts[j] == 1) {		//if alternative not changed to false (all alternatives are true by default)
+				if (sudoku[i][k].alts[j] == 1) {		//if alternative not changed from default (i.e true)
 					if (possAdd(i, k, j) == 0) {		//check if alternative should be false
 						sudoku[i][k].alts[j] = 0;		//set alternative to false
 					}
