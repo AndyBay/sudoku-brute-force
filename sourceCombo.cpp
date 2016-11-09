@@ -9,7 +9,7 @@ const int  MAXSTR = 200;                                //max length of string (
 const int  OFFSET = 1;                                  //offset by "1" as an array starts at 0, but lowest sudoku value = 1 
       int  testing = 0;                                 //enables testoutput (1 = changed value | 2 = current board progression)
       char filename[MAXSTR] = "BOARD.DTA";              //edit filename to apply own specific file (in acceptable format)
-                                                        //		or add filename directly into console (also works for testing)
+                                                        //      or add filename directly into console (also works for testing)
 void print();
 void printAlts();
 void solveUnique();
@@ -152,7 +152,7 @@ void print() {                                          //prints out current sta
 }
 
 void printAlts() {                                      //prints out current states of alternatives for each cell
-                                                        //		for testing purposes only
+                                                        //      for testing purposes only
     for (int i = 0; i < MAXV; i++) {
         std::cout << '\n';
         for (int k = 0; k < MAXV; k++) {
@@ -372,7 +372,7 @@ void solveBackTrack() {                                 //solves board by trying
                 do {
                     through = false;                    //resets variable if changed
                     j++;                                //+1 for temp variable
-                                                        //		(starts at 0 and becomes "1" (lowest legal value))
+                                                        //      (starts at 0 and becomes "1" (lowest legal value))
 
                     if (j <= MAXV) {                    //legal value not overreached
                         if (passedTests(i, k, j)) {     //goes through all tests
